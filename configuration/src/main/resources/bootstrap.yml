@@ -1,8 +1,13 @@
-spring.application.name: ms-configuration
-spring.cloud.config.server:
-  bootstrap: true
-  prefix: /configuration
-  git:
-    uri: file://${user.home}/config-repo
-    search-paths: apps,files,env/${MS_ENV:local}
-spring.profiles.active: env-${MS_ENV:local}
+spring:
+  application.name: @project.artifactId@
+  cloud.config.server:
+    bootstrap: true
+    prefix: /configuration
+    git:
+      uri: file://${user.home}/config-repo
+      search-paths: apps,files,env/${MS_ENV:local}
+  profiles.active: env-${MS_ENV:local}
+  main.banner-mode: 'off'
+info.app:
+  name: ${spring.application.name}
+  version: @project.version@

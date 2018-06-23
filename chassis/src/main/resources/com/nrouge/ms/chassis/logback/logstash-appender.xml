@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+	<springProperty scope="context" name="logstashServer" source="logging.logstash.server" defaultValue="localhost:5000" />
+	<springProperty scope="context" name="appName" source="info.app.name" />
+	<springProperty scope="context" name="appVersion" source="info.app.version" />
+
+	<!-- see : https://github.com/logstash/logstash-logback-encoder -->
+	<!-- see : https://balamaci.ro/java-app-monitoring-with-elk-logstash/ -->
+	<!-- see : https://layer4.fr/blog/2016/10/25/efficient-logging-spring-boot-logback-logstash/ -->
+	<appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>${logstashServer}</destination>
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<mdc /> <!-- MDC variables on the Thread will be written as JSON fields-->
+				<context /> <!--Outputs entries from logback's context -->
+				<version /> <!-- Logstash json format version, the @version field in the output-->
+				<logLevel />
+				<loggerName />
+				<pattern>
+					<pattern>
+						{
+						<!-- we can add some custom fields to be sent with all the log entries.-->
+						<!--make filtering easier in Logstash-->
+						"appName": "${appName}",
+						"appVersion": "${appVersion}"
+						}
+					</pattern>
+				</pattern>
+
+				<threadName />
+				<message />
+
+				<logstashMarkers /> <!-- Useful so we can add extra information for specific log lines as Markers-->
+				<arguments /> <!--or through StructuredArguments-->
+
+				<stackTrace />
+			</providers>
+		</encoder>
+	</appender>
+</included>

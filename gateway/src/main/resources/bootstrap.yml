@@ -1,3 +1,8 @@
 spring:
-  application.name: ms-gateway
+  application.name: @project.artifactId@
   cloud.config.uri: http://localhost:8888/configuration
+  profiles.active: env-${MS_ENV:local}
+  main.banner-mode: 'off'
+info.app:
+  name: ${spring.application.name}
+  version: @project.version@

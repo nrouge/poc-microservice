@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+	<springProfile name="logging-logstash">
+		<include resource="com/nrouge/ms/chassis/logback/logstash-appender.xml" />
+	</springProfile>
+
+	<root level="INFO">
+		<springProfile name="logging-console">
+			<appender-ref ref="CONSOLE" />
+		</springProfile>
+		<springProfile name="logging-logstash">
+			<appender-ref ref="logstash" />
+		</springProfile>
+	</root>
+
+</configuration>

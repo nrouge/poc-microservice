@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "index_patterns": [
+    {
+      "es": {
+        "default_index": "logstash-*"
+      },
+      "tail_interval_in_seconds": 10,
+      "es_index_time_offset_in_seconds": 0,
+      "display_timezone": "local",
+      "display_timestamp_format": "YYYY-MM-DD HH:mm:ss.SSS",
+      "max_buckets": 500,
+      "default_time_range_in_days": 0,
+      "max_hosts": 100,
+      "max_events_to_keep_in_viewer": 5000,
+      "fields": {
+        "mapping": {
+          "timestamp": "@timestamp",
+          "hostname": "host",
+          "program": "appName",
+          "level": "level",
+          "message": "message"
+        },
+        "message_format": "{{{level}}} [{{{X-B3-TraceId}}},{{{X-B3-SpanId}}}] ({{{thread_name}}}) {{{logger_name}}} : {{{message}}}"
+      },
+      "color_mapping": {
+        "field": "level",
+        "mapping": {
+          "ERROR": "#FF0000",
+          "WARN": "#FFEF96",
+          "DEBUG": "#B5E7A0",
+          "TRACE": "#CFE0E8"
+        }
+      }
+    }
+  ]
+}
