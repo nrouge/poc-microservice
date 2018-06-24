@@ -1,5 +1,6 @@
 package com.nrouge.ms.customer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -20,6 +21,7 @@ import java.util.List;
 @EnableDiscoveryClient
 @EnableSwagger2
 @RestController
+@Slf4j
 public class CustomerApplication {
 
 	public static void main(String[] args) {
@@ -33,6 +35,7 @@ public class CustomerApplication {
 
 	@GetMapping("/customers")
 	public List<Customer> allCustomers() {
+		log.info("Called /customers");
 		return customers;
 	}
 

@@ -4,10 +4,15 @@ spring:
     bootstrap: true
     prefix: /configuration
     git:
-      uri: file://${user.home}/config-repo
+      uri: https://github.com/nrouge/poc-microservice-config.git
       search-paths: apps,files,env/${MS_ENV:local}
   profiles.active: env-${MS_ENV:local}
   main.banner-mode: 'off'
 info.app:
   name: ${spring.application.name}
   version: @project.version@
+---
+spring.profiles: native
+spring.cloud.config.server:
+  git.uri: ''
+  native.search-locations: file://${user.home}/config-repo/apps,file://${user.home}/config-repo/files,file://${user.home}/config-repo/env/${MS_ENV:local}

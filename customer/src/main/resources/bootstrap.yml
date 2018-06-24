@@ -1,6 +1,8 @@
 spring:
   application.name: @project.artifactId@
-  cloud.config.uri: http://localhost:8888/configuration
+  cloud.config:
+    uri: http://localhost:8888/configuration
+    fail-fast: true
   profiles.active: env-${MS_ENV:local}
   main.banner-mode: 'off'
 info.app:
