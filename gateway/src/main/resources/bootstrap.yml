@@ -4,7 +4,6 @@ spring:
     uri: http://localhost:8888/configuration
     fail-fast: true
   profiles.active: env-${MS_ENV:local}
-  main.banner-mode: 'off'
 info.app:
   name: ${spring.application.name}
   version: @project.version@
